@@ -31,10 +31,13 @@ for dest_ppa_name in DEST_PPAS:
 
         if need_sync:
             print "synchronizing to version %s" % (source_package.source_package_version)
-            dest_ppa.syncSource(
-                                from_archive = source_package.archive,
-                                source_name  = source_package.source_package_name,
-                                version      = source_package.source_package_version,
-                                to_series    = dest_ppa_name,
-                                to_pocket    = source_package.pocket
-                            )
+            try:
+                dest_ppa.syncSource(
+                                    from_archive = source_package.archive,
+                                    source_name  = source_package.source_package_name,
+                                    version      = source_package.source_package_version,
+                                    to_series    = dest_ppa_name,
+                                    to_pocket    = source_package.pocket
+                                    )
+            except Exception, e:
+                print e
